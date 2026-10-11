@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abhinav's Restaurant</title>
+  <meta name="description" content="Authentic Indian cuisine in a warm, modern setting. Explore our menu and book a table today." />
+  <meta property="og:title" content="Abhinav's Restaurant" />
+  <meta property="og:description" content="Authentic Indian cuisine in a warm, modern setting. Explore our menu and book a table today." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-domain.vercel.app/" />
+  <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Abhinav%27s+Restaurant" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2C3E50',
+            'primary-dark': '#1A252F',
+            accent: '#D4A574',
+            'accent-hover': '#C49564',
+            background: '#FAFAFA',
+            surface: '#FFFFFF',
+            'text-primary': '#1A1A2E',
+            'text-secondary': '#4A4A68',
+            'text-muted': '#888899',
+            border: '#E8E8ED',
+            error: '#C0392B',
+            success: '#27AE60',
+          },
+          fontFamily: {
+            sans: ['"Inter"', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="bg-background text-text-primary font-sans antialiased">
+  <!-- Hero Section -->
+  <section id="hero" class="hero min-h-screen flex items-center justify-center text-center px-4">
+    <div class="max-w-2xl">
+      <h1 class="text-5xl md:text-6xl font-bold text-white mb-4">Welcome to Abhinav's Restaurant</h1>
+      <p class="text-lg md:text-xl text-white mb-8">Experience the flavors of India with a modern twist.</p>
+      <a href="#menu" class="cta-btn inline-block bg-accent text-white font-medium py-3 px-6 rounded-md hover:bg-accent-hover transition-colors">Explore Our Menu</a>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section id="menu" class="menu py-16 bg-surface">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center mb-12 text-text-primary">Our Signature Dishes</h2>
+      <div class="grid gap-8 auto-rows-fr" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+        <!-- Menu Item 1 -->
+        <article class="menu-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105">
+          <div class="image-placeholder h-48 bg-gradient-to-r from-primary to-primary-dark"></div>
+          <div class="p-4">
+            <h3 class="text-2xl font-semibold text-text-primary mb-2">Butter Chicken</h3>
+            <p class="text-sm text-text-secondary mb-3">Tender chicken simmered in a creamy tomato sauce.</p>
+            <span class="price-badge inline-block bg-accent text-white font-medium px-3 py-1 rounded-full">$12.99</span>
+          </div>
+        </article>
+        <!-- Menu Item 2 -->
+        <article class="menu-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105">
+          <div class="image-placeholder h-48 bg-gradient-to-r from-primary to-primary-dark"></div>
+          <div class="p-4">
+            <h3 class="text-2xl font-semibold text-text-primary mb-2">Paneer Tikka</h3>
+            <p class="text-sm text-text-secondary mb-3">Grilled cottage cheese cubes marinated in spices.</p>
+            <span class="price-badge inline-block bg-accent text-white font-medium px-3 py-1 rounded-full">$10.50</span>
+          </div>
+        </article>
+        <!-- Menu Item 3 -->
+        <article class="menu-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105">
+          <div class="image-placeholder h-48 bg-gradient-to-r from-primary to-primary-dark"></div>
+          <div class="p-4">
+            <h3 class="text-2xl font-semibold text-text-primary mb-2">Lamb Rogan Josh</h3>
+            <p class="text-sm text-text-secondary mb-3">Slow‑cooked lamb in aromatic Kashmiri gravy.</p>
+            <span class="price-badge inline-block bg-accent text-white font-medium px-3 py-1 rounded-full">$15.75</span>
+          </div>
+        </article>
+        <!-- Menu Item 4 -->
+        <article class="menu-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105">
+          <div class="image-placeholder h-48 bg-gradient-to-r from-primary to-primary-dark"></div>
+          <div class="p-4">
+            <h3 class="text-2xl font-semibold text-text-primary mb-2">Masala Dosa</h3>
+            <p class="text-sm text-text-secondary mb-3">Crispy rice‑crepe stuffed with spiced potatoes.</p>
+            <span class="price-badge inline-block bg-accent text-white font-medium px-3 py-1 rounded-full">$9.99</span>
+          </div>
+        </article>
+        <!-- Menu Item 5 -->
+        <article class="menu-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105">
+          <div class="image-placeholder h-48 bg-gradient-to-r from-primary to-primary-dark"></div>
+          <div class="p-4">
+            <h3 class="text-2xl font-semibold text-text-primary mb-2">Gulab Jamun</h3>
+            <p class="text-sm text-text-secondary mb-3">Soft milk‑solid dumplings soaked in rose‑scented syrup.</p>
+            <span class="price-badge inline-block bg-accent text-white font-medium px-3 py-1 rounded-full">$5.50</span>
+          </div>
+        </article>
+        <!-- Menu Item 6 -->
+        <article class="menu-card bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105">
+          <div class="image-placeholder h-48 bg-gradient-to-r from-primary to-primary-dark"></div>
+          <div class="p-4">
+            <h3 class="text-2xl font-semibold text-text-primary mb-2">Mango Lassi</h3>
+            <p class="text-sm text-text-secondary mb-3">Refreshing yogurt drink blended with ripe mango.</p>
+            <span class="price-badge inline-block bg-accent text-white font-medium px-3 py-1 rounded-full">$4.75</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact py-16 bg-background">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center mb-12 text-text-primary">Get in Touch</h2>
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <!-- Info Card 1 -->
+        <div class="info-card p-6 bg-surface rounded-lg shadow-sm text-center">
+          <svg class="w-12 h-12 mx-auto mb-4 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+          <h3 class="text-xl font-semibold mb-2 text-text-primary">Location</h3>
+          <p class="text-text-secondary">123 Spice Road, Flavor Town</p>
+        </div>
+        <!-- Info Card 2 -->
+        <div class="info-card p-6 bg-surface rounded-lg shadow-sm text-center">
+          <svg class="w-12 h-12 mx-auto mb-4 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.5 2.53.77 3.88.77a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 22 2 13.93 2 3.5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.26 2.67.77 3.88a1 1 0 01-.21 1.11l-2.44 2.3z"/></svg>
+          <h3 class="text-xl font-semibold mb-2 text-text-primary">Phone</h3>
+          <p class="text-text-secondary">+1 (555) 123‑4567</p>
+        </div>
+        <!-- Info Card 3 -->
+        <div class="info-card p-6 bg-surface rounded-lg shadow-sm text-center">
+          <svg class="w-12 h-12 mx-auto mb-4 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 4-7 4.5L5 8V6l7 4.5L19 6v2z"/></svg>
+          <h3 class="text-xl font-semibold mb-2 text-text-primary">Email</h3>
+          <p class="text-text-secondary">info@abhinavs.com</p>
+        </div>
+      </div>
+
+      <form id="contact-form" class="mt-12 max-w-xl mx-auto bg-surface p-8 rounded-lg shadow-md" novalidate>
+        <h3 class="text-2xl font-bold mb-6 text-text-primary text-center">Send a Message</h3>
+        <div class="mb-4">
+          <label for="name" class="block text-sm font-medium text-text-secondary mb-1">Name</label>
+          <input type="text" id="name" name="name" required class="input-field w-full rounded-md border border-border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
+        </div>
+        <div class="mb-4">
+          <label for="email" class="block text-sm font-medium text-text-secondary mb-1">Email</label>
+          <input type="email" id="email" name="email" required class="input-field w-full rounded-md border border-border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
+        </div>
+        <div class="mb-4">
+          <label for="phone" class="block text-sm font-medium text-text-secondary mb-1">Phone (optional)</label>
+          <input type="tel" id="phone" name="phone" class="input-field w-full rounded-md border border-border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
+        </div>
+        <div class="mb-4">
+          <label for="message" class="block text-sm font-medium text-text-secondary mb-1">Message</label>
+          <textarea id="message" name="message" rows="4" required class="input-field w-full rounded-md border border-border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent"></textarea>
+        </div>
+        <button type="submit" class="submit-btn w-full bg-primary text-white font-medium py-2 rounded-md hover:bg-primary-dark transition-colors">Send</button>
+        <p id="form-status" class="mt-4 text-center text-sm"></p>
+      </form>
+    </div>
+  </section>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>
