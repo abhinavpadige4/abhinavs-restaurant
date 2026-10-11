@@ -1,0 +1,71 @@
+/* Import base design tokens and utility classes */
+@import "./styles.css";
+
+/* ------------------------------------------------------------
+   Hero Section Styles
+   ------------------------------------------------------------ */
+
+/* Root variables for responsive typography (clamp) */
+:root {
+  --hero-title-size: clamp(2rem, 5vw + 1rem, 4rem);
+  --hero-subtitle-size: clamp(1rem, 3vw + 0.5rem, 1.5rem);
+  --hero-cta-size: clamp(0.875rem, 2vw + 0.5rem, 1rem);
+}
+
+/* Hero container – full viewport height, centered content */
+.hero {
+  @apply flex items-center justify-center min-h-screen bg-gradient-to-r from-primary to-accent;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient overlay for better text contrast */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(44,62,80,0.6), rgba(212,165,116,0.4));
+  pointer-events: none;
+}
+
+/* Inner wrapper to keep content above overlay */
+.hero > .container {
+  @apply relative z-10 text-center max-w-2xl;
+}
+
+.hero h1 {
+  @apply font-bold text-white;
+  font-size: var(--hero-title-size);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  @apply text-white opacity-90;
+  font-size: var(--hero-subtitle-size);
+  margin-bottom: 1.5rem;
+}
+
+/* CTA button – primary style with hover/focus states */
+.cta-btn {
+  @apply inline-block bg-primary text-white font-medium py-3 px-6 rounded-md transition-transform duration-200 ease-out;
+  font-size: var(--hero-cta-size);
+}
+
+.cta-btn:hover {
+  @apply hover:bg-primary-dark hover:scale-105;
+}
+
+.cta-btn:focus {
+  @apply focus:outline-none focus:ring-2 focus:ring-accent;
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 640px) {
+  .hero h1 {
+    font-size: clamp(1.5rem, 6vw + 0.5rem, 3rem);
+  }
+  .hero p {
+    font-size: clamp(0.875rem, 4vw + 0.25rem, 1.25rem);
+  }
+}
