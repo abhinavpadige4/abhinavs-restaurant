@@ -1,0 +1,70 @@
+/* css/menu.css */
+/* Menu section styling – depends on css/styles.css for design tokens */
+
+/* Container for the menu grid */
+.menu {
+  @apply grid gap-8 auto-rows-fr;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Individual menu card */
+.menu-card {
+  @apply bg-surface rounded-md shadow-md overflow-hidden flex flex-col transition-transform duration-300 ease-out;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+/* Image placeholder – uses a gradient defined in styles.css */
+.menu-card .image-placeholder {
+  @apply h-48 w-full bg-gradient-to-r from-primary to-accent;
+  flex-shrink: 0;
+}
+
+/* Card content */
+.menu-card .card-content {
+  @apply p-4 flex-1 flex flex-col justify-between;
+}
+
+.menu-card h3 {
+  @apply text-primary font-bold text-lg mb-2;
+}
+
+.menu-card p {
+  @apply text-muted text-sm flex-1 mb-4;
+}
+
+/* Price badge */
+.menu-card .price-badge {
+  @apply inline-block bg-primary text-white font-medium px-3 py-1 rounded-full self-start;
+}
+
+/* Hover / focus interaction */
+.menu-card:hover,
+.menu-card:focus-within {
+  @apply hover:scale-105;
+  transform: translateY(0) scale(1.02);
+  opacity: 1;
+}
+
+/* Staggered entrance animation using IntersectionObserver – defined in js/main.js */
+.menu-card.visible {
+  animation: fadeInUp 0.6s forwards;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .menu-card .image-placeholder {
+    @apply h-36;
+  }
+}
