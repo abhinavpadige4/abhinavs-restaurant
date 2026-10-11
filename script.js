@@ -1,146 +1,83 @@
-(function () {
-  'use strict';
-
-  // ---------- Design Tokens (mirrored from CSS) ----------
-  const TOAST_DURATION = 4000; // ms
-  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  // ---------- Helper Functions ----------
-  function createToast(message, type = 'success') {
-    const toast = document.createElement('div');
-    toast.className = `toast toast--${type}`;
-    toast.textContent = message;
-    document.body.appendChild(toast);
-    setTimeout(() => {
-      toast.classList.add('toast--hide');
-      toast.addEventListener('transitionend', () => toast.remove());
-    }, TOAST_DURATION);
-  }
-
-  function smoothScroll(target) {
-    const element = document.querySelector(target);
-    if (!element) return;
-    const top = element.getBoundingClientRect().top + window.pageYOffset - 80; // offset for fixed header
-    window.scrollTo({ top, behavior: 'smooth' });
-  }
-
-  // ---------- Smooth Scroll Polyfill for Anchor Links ----------
-  function initSmoothScroll() {
-    document.addEventListener('click', function (e) {
-      const link = e.target.closest('a[href^="#"]');
-      if (!link) return;
-      const href = link.getAttribute('href');
-      if (href.length > 1) {
+(function() {
+  // Smooth scroll for internal links (fallback for older browsers)
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href').substring(1);
+      const target = document.getElementById(targetId);
+      if (target) {
         e.preventDefault();
-        smoothScroll(href);
-        // Update URL hash without jumping
-        history.pushState(null, '', href);
+        target.scrollIntoView({ behavior: 'smooth' });
       }
     });
-  }
+  });
 
-  // ---------- Form Validation & Submission ----------
-  function validateForm(data) {
-    const errors = [];
-    if (!data.name || data.name.trim().length === 0) {
-      errors.push('Name is required.');
-    } else if (data.name.length > 100) {
-      errors.push('Name must be less than 100 characters.');
-    }
-
-    if (!data.email || data.email.trim().length === 0) {
-      errors.push('Email is required.');
-    } else if (!EMAIL_REGEX.test(data.email)) {
-      errors.push('Please enter a valid email address.');
-    }
-
-    if (!data.message || data.message.trim().length === 0) {
-      errors.push('Message is required.');
-    } else if (data.message.length > 2000) {
-      errors.push('Message must be less than 2000 characters.');
-    }
-
-    return errors;
-  }
-
-  function initContactForm() {
-    const form = document.querySelector('#contact form[data-form-action]');
-    if (!form) return;
-    const endpoint = form.dataset.formAction;
-
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const payload = {
-        name: formData.get('name')?.trim() || '',
-        email: formData.get('email')?.trim() || '',
-        message: formData.get('message')?.trim() || ''
-      };
-
-      const errors = validateForm(payload);
-      if (errors.length) {
-        createToast(errors.join(' '), 'error');
-        return;
-      }
-
-      try {
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
-        if (response.ok) {
-          createToast('Message sent! Thank you.', 'success');
-          form.reset();
-        } else {
-          const data = await response.json();
-          const msg = data.error || 'Something went wrong. Please try again later.';
-          createToast(msg, 'error');
-        }
-      } catch (err) {
-        createToast('Network error. Please check your connection.', 'error');
+  // IntersectionObserver for fade‑in animations
+  const observerOptions = {
+    threshold: 0.1
+  };
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
       }
     });
+  }, observerOptions);
+
+  document.querySelectorAll('.menu__item').forEach(el => revealObserver.observe(el));
+
+  // Lazy‑load placeholder images (using background gradient as placeholder)
+  // In this demo we use CSS gradients, so no actual image loading needed.
+
+  // Form handling
+  const form = document.getElementById('contact-form');
+  const toast = document.getElementById('toast');
+
+  function showToast(message, type = 'success') {
+    toast.textContent = message;
+    toast.className = `fixed bottom-4 right-4 max-w-xs p-4 rounded-md shadow-lg ${type}`;
+    toast.classList.remove('hidden');
+    setTimeout(() => { toast.classList.add('hidden'); }, 4000);
   }
 
-  // ---------- Scroll‑Reveal Animations for Menu Cards ----------
-  function initScrollReveal() {
-    const cards = document.querySelectorAll('.menu__card');
-    if (!cards.length) return;
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('menu__card--visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    cards.forEach(card => observer.observe(card));
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
   }
 
-  // ---------- Mobile Navigation Toggle (optional) ----------
-  function initMobileNav() {
-    const toggleBtn = document.querySelector('.nav__toggle');
-    const navMenu = document.querySelector('.nav__menu');
-    if (!toggleBtn || !navMenu) return;
-    toggleBtn.addEventListener('click', () => {
-      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-      toggleBtn.setAttribute('aria-expanded', String(!expanded));
-      navMenu.classList.toggle('nav__menu--open');
-    });
-  }
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
 
-  // ---------- Init ----------
-  document.addEventListener('DOMContentLoaded', () => {
-    initSmoothScroll();
-    initContactForm();
-    initScrollReveal();
-    initMobileNav();
+    if (!name || !email || !message) {
+      showToast('Please fill in all fields.', 'error');
+      return;
+    }
+    if (!validateEmail(email)) {
+      showToast('Please enter a valid email address.', 'error');
+      return;
+    }
+
+    const payload = { name, email, message };
+    const endpoint = 'https://formspree.io/f/{{FORMSPREE_ID}}'; // replace with actual ID in deployment
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json();
+      if (response.ok) {
+        showToast('Message sent successfully!');
+        form.reset();
+      } else {
+        showToast(result.message || 'Something went wrong.', 'error');
+      }
+    } catch (err) {
+      showToast('Network error. Please try again later.', 'error');
+    }
   });
 })();
